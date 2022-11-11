@@ -29,6 +29,12 @@ public class HomePage {
 		password.sendKeys(read.password());
 	}
 	
+	public void entercredwithparameter(String username1 ,String password1) {
+		username.sendKeys(username1);
+		password.sendKeys(password1);
+	}
+	
+	
 	public void clicklgbtn () {
 		loginbtn.click();
 	}

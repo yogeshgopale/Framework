@@ -1,7 +1,14 @@
 package com.base;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -19,7 +26,7 @@ public class BaseClass {
 	
 	String Browserval = prop.browser();
 	
-	public WebDriver driver;
+	public static WebDriver driver;
 	
 protected	String URL = prop.URL();
 	
@@ -51,4 +58,21 @@ protected	String URL = prop.URL();
 	public void tearup() {
 		driver.close();
 	}
+	
+	public void captureScreenShot(WebDriver driver, String testName) throws IOException {
+		// step1: convert webDriver object to TakesScreenshot interface
+		TakesScreenshot screenshot = ((TakesScreenshot) driver);
+
+		// step2: call getScreenshotAs method to create image file
+		
+		String timestamp = new SimpleDateFormat("yyyy.mm.dd.hh.mm.ss").format(new Date());
+
+		File src = screenshot.getScreenshotAs(OutputType.FILE);
+
+		File dest = new File(System.getProperty("user.dir") + "//screenshots//" + testName + timestamp +".png");
+
+		// step3: copy image file to destination
+		FileUtils.copyFile(src, dest);
+	}
+	
 }

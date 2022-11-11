@@ -21,6 +21,8 @@ public	PropertiesRead(){
 	public String URL() {
 		String mainURL = prop.getProperty("url");
 		return mainURL;
+		
+//String mainurl=		System.out.println(prop.getProperty(url));
 	}
 	
 	public String username() {
